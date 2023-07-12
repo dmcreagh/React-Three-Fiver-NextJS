@@ -1,10 +1,11 @@
 'use client'
-import React, { useRef } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { Physics, usePlane, useBox, useSphere } from '@react-three/cannon';
- function Plane(props: any): React.ReactElement {
-  const ref = useRef<THREE.Mesh>();
-  const [planeRef] = usePlane(() => ({ ...props, ref }));
+import { useRef } from "react";
+import { Canvas } from "@react-three/fiber";
+import { Physics, usePlane, useBox, useSphere } from "@react-three/cannon";
+ function Plane(props) {
+  // Usa React.RefObject<THREE.Mesh> para indicar que el ref es de tipo THREE.Mesh
+  const ref1 = useRef(null);
+  const [planeRef] = usePlane(() => ({ ...props, ref1 }));
   return (
     <mesh ref={planeRef} receiveShadow>
       <planeGeometry args={[100, 100]} />
@@ -12,8 +13,8 @@ import { Physics, usePlane, useBox, useSphere } from '@react-three/cannon';
     </mesh>
   );
 }
- function Sphere(props: any): React.ReactElement {
-  const ref = useRef<THREE.Mesh>();
+ function Sphere(props) {
+  const ref = useRef(null);
   const [sphereRef] = useSphere(() => ({ mass: 1, ...props, ref }));
   return (
     <mesh ref={sphereRef} castShadow receiveShadow>
@@ -22,8 +23,8 @@ import { Physics, usePlane, useBox, useSphere } from '@react-three/cannon';
     </mesh>
   );
 }
- function Cube(props: any): React.ReactElement {
-  const ref = useRef<THREE.Mesh>();
+ function Cube(props) {
+  const ref = useRef(null);
   const [cubeRef] = useBox(() => ({ mass: 1, ...props, ref }));
   return (
     <mesh ref={cubeRef} castShadow receiveShadow>
@@ -32,7 +33,7 @@ import { Physics, usePlane, useBox, useSphere } from '@react-three/cannon';
     </mesh>
   );
 }
- function AppFisica(): React.ReactElement {
+ function AppFisica() {
   return (
     <Canvas shadows camera={{ position: [0, 5, 10], fov: 50 }}>
       <ambientLight intensity={0.3} />
@@ -42,6 +43,10 @@ import { Physics, usePlane, useBox, useSphere } from '@react-three/cannon';
         <Cube position={[1, 50, 0]} scale={[2, 2, 2]} />
         <Cube position={[3, 6, -3]} scale={[3, 3, 3]} />
         <Cube position={[0, 10, -2]} scale={[10, 10, 10]} />
+        <Sphere position={[0, 20, -2]} />
+        <Cube position={[1, 70, 0]} scale={[2, 2, 2]} />
+        <Cube position={[3, 8, -3]} scale={[3, 3, 3]} />
+        <Cube position={[0, 50, -2]} scale={[10, 10, 10]} />
         <Sphere position={[0, 20, -2]} />
       </Physics>
     </Canvas>

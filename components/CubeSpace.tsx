@@ -59,7 +59,7 @@ function AppCube() {
 
         <Canvas>
             <ambientLight />
-            <pointLight position={[10, 10, 10]} />
+            <pointLight type="PointLight" position={[10, 10, 10]} />
             <Cube position={[-3, 0, 0]} scale={[1, 1, 1]} />
             <Capsule position={[3, 0, 0]} scale={[1, 1, 1]} />
 
